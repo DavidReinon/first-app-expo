@@ -4,20 +4,18 @@ import React, { useState } from "react";
 export default function App() {
     const [color, setColor] = useState("green");
     const [text, setText] = useState("My Title");
-    const [image, setImage] = useState(require("./assets/favicon.png"));
+
     function handleOnPress() {
         setColor(color === "yellow" ? "green" : "yellow");
         setText(text === "My Title" ? "My New Tytle" : "My Title");
-        setImage(
-            image === require("./assets/favicon.png")
-                ? require("./assets/icon.png")
-                : require("./assets/favicon.png")
-        );
     }
     return (
         <View style={[styles.container, { backgroundColor: color }]}>
             <Text style={styles.title}>{text}</Text>
-            <Image style={styles.image} source={image} />
+            <Image
+                style={styles.image}
+                source={require("./assets/favicon.png")}
+            />
             <Button onPress={handleOnPress} title="Pulsame!" />
         </View>
     );
