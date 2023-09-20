@@ -1,23 +1,43 @@
-import { View, Button, Text, Image, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import React, { useState } from "react";
+import { Dimensions } from "react-native";
 
 export default function App() {
-    const [color, setColor] = useState("green");
-    const [text, setText] = useState("My Title");
-    const [image, setImage] = useState(require("./assets/favicon.png"));
+    const initialSize = 200;
+    const [shapeSizeChange, setshapeSizeChange] = useState(initialSize);
+    const [shapeBackGroundColor, setShapeBackGroundColor] = useState("yellow");
+    const screenWidth = Dimensions.get("window").width;
+    const [isIncreasing, setIsIncreasing] = useState(true);
+    const [backGroundColor, setBackGroundColor] = useState("black");
+
     function handleOnPress() {
-        setColor(color === "yellow" ? "green" : "yellow");
-        setText(text === "My Title" ? "My New Tytle" : "My Title");
-        setImage(
-            image === require("./assets/favicon.png")
-                ? require("./assets/icon.png")
-                : require("./assets/favicon.png")
+        setShapeBackGroundColor(
+            shapeBackGroundColor === "yellow" ? "green" : "yellow"
         );
+        setBackGroundColor(backGroundColor === "black" ? "white" : "black");
+
+        if (isIncreasing) {
+            if (shapeSizeChange < screenWidth) {
+                return setshapeSizeChange(shapeSizeChange + 50);
+            }
+            return setIsIncreasing(false);
+        }
+        if (shapeSizeChange > initialSize) {
+            return setshapeSizeChange(shapeSizeChange - 50);
+        }
+        return setIsIncreasing(true);
     }
+
     return (
-        <View style={[styles.container, { backgroundColor: color }]}>
-            <Text style={styles.title}>{text}</Text>
-            <Image style={styles.image} source={image} />
+        <View style={[styles.container, { backgroundColor: backGroundColor }]}>
+            <View
+                style={[
+                    styles.square,
+                    { height: shapeSizeChange },
+                    { width: shapeSizeChange },
+                    { backgroundColor: shapeBackGroundColor },
+                ]}
+            />
             <Button onPress={handleOnPress} title="Pulsame!" />
         </View>
     );
@@ -26,18 +46,12 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "yellow",
+        backgroundColor: "black",
         alignItems: "center",
         justifyContent: "center",
     },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold",
-        fontStyle: "italic",
-        textDecorationLine: "underline",
-    },
-    image: {
-        width: 200,
-        height: 200,
+    square: {
+        marginTop: -6,
+        backgroundColor: "yellow",
     },
 });
