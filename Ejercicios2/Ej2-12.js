@@ -1,25 +1,38 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, Image, View, StyleSheet } from "react-native";
 export default function App() {
-    const [{ image1 }, setImage1] = useState({
+    const [image1, setImage1] = useState({
         image: require("./assets/icon.png"),
         text: "1",
     });
-    const [{ image2 }, setImage2] = useState({
+    const [image2, setImage2] = useState({
         image: require("./assets/icon.png"),
         text: "2",
     });
     const handleOnImage = (imageType) => {
-        if (imageType === "image1")
+        if (imageType === "image1") {
+            if (image1.image === require("./assets/icon.png")) {
+                return setImage1({
+                    image: require("./assets/favicon.png"),
+                    text: "1Cambiado",
+                });
+            }
             return setImage1({
-                image: require("./assets/splash.png"),
-                text: "1cambiado",
+                image: require("./assets/icon.png"),
+                text: "1",
             });
-        if (imageType === "image2")
+        }
+
+        if (image2.image === require("./assets/icon.png")) {
             return setImage2({
-                image: require("./assets/splash.png"),
-                text: "2cambiado",
+                image: require("./assets/favicon.png"),
+                text: "2Cambiado",
             });
+        }
+        return setImage2({
+            image: require("./assets/icon.png"),
+            text: "2",
+        });
     };
     return (
         <View style={styles.containerRow}>
