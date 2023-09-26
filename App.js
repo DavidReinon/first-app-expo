@@ -1,60 +1,32 @@
-import { TouchableOpacity, View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Text, TextInput, View, StyleSheet, Button } from "react-native";
 export default function App() {
-    const [changeSize, setChangeSize] = useState(200);
-    const [changeColor, setChangeColor] = useState("yellow");
-
-    const handleOnImage = (imageType) => {
-        if (imageType === "increase") {
-            setChangeSize((prevSize) => prevSize + 10);
-            //setChangeSize(changeSize + 10);
-            setChangeColor("green");
-            return;
-        }
-        setChangeSize((prevSize) => prevSize - 10);
-        //setChangeSize(changeSize - 10);
-        setChangeColor("yellow");
+    const [text, setText] = useState("");
+    const handleOnPress = () => {
+        if (typeof text === "string") return alert("Es texto");
+        if (typeof text === "number") return alert("Es numero");
+        if (text === "") return alert("No se ha escrito nada");
+        return alert("No se sabe");
     };
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={[
-                    styles.square,
-                    {
-                        width: changeSize,
-                        height: changeSize,
-                        backgroundColor: changeColor,
-                    },
-                ]}
-                onPress={() => handleOnImage("increase")}
+            <TextInput
+                style={{ height: 40 }}
+                placeholder="Inserta tu texto..."
+                onChangeText={(newText) => setText(newText)}
+                defaultValue={text}
             />
-            <TouchableOpacity
-                style={[
-                    styles.square,
-                    {
-                        width: changeSize,
-                        height: changeSize,
-                        backgroundColor: changeColor,
-                    },
-                ]}
-                onPress={() => handleOnImage("decrease")}
-            />
+            <Button title="TIPO" onPress={() => handleOnPress()}>
+                {" "}
+            </Button>
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
-    },
-    square: {
-        size: "100",
-        mt: "-2",
-        marginTop: -6,
-        width: 200,
-        height: 200,
-        backgroundColor: "yellow",
     },
 });
