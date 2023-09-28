@@ -13,26 +13,9 @@ export default function App() {
             color: "red",
         },
     ]);
-    const cuadradoAzul = {
-        width: 100,
-        height: 100,
-        color: "blue",
-    };
-    const cuadradoRojo = {
-        width: 100,
-        height: 100,
-        color: "blue",
-    };
-    const cuadradosAzules = [];
-    const cuadradosRojos = [];
-
-    for (i = 0; i < 3; i++) {
-        cuadradosAzules.push(cuadradoAzul);
-        cuadradosRojos.push(cuadradoRojo);
-    }
     return (
         <View style={styles.container}>
-            {cuadradosAzules.map((element, index) => (
+            {cuadrados.map((element, index) => (
                 <View key={index.toString()} style={{ flexDirection: "row" }}>
                     <View
                         width={element.width}
