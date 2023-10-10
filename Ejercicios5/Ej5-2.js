@@ -2,40 +2,28 @@ import { useState } from "react";
 import { Text, TextInput, View, StyleSheet, Button } from "react-native";
 
 export default function App() {
-    const [textDni, setTextDni] = useState("");
-    const [textNombre, setTextNombre] = useState("");
+    const [text, setText] = useState("");
     const [myArray, setMyArray] = useState([]);
 
     const handleOnPress = () => {
-        if (textDni === "" || textNombre === "")
-            return alert("No se ha escrito nada");
-        //Comprobacion de errores...
-
+        const numero = parseFloat(text);
+        if (text === "") return alert("No se ha escrito nada");
+        if (isNaN(numero)) return alert("Se ha escrito texto");
         let newArray = [...myArray];
-        newArray.push({ dni: textDni, nombre: textNombre });
+        newArray.push(text);
         setMyArray(newArray);
     };
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: 40 }}>DNI</Text>
             <TextInput
                 style={{ height: 40 }}
                 placeholder="Inserta tu texto..."
-                onChangeText={(newText) => setTextDni(newText)}
-                defaultValue=""
-            />
-            <Text style={{ fontSize: 40 }}>Nombre</Text>
-            <TextInput
-                style={{ height: 40 }}
-                placeholder="Inserta tu texto..."
-                onChangeText={(newText) => setTextNombre(newText)}
+                onChangeText={(newText) => setText(newText)}
                 defaultValue=""
             />
             {myArray.map((element, index) => (
-                <Text key={index.toString()}>
-                    {`${element.nombre} / ${element.dni}`}
-                </Text>
+                <Text key={index.toString()}>{element}</Text>
             ))}
             <Button title="Pulsa" onPress={() => handleOnPress()} />
         </View>
