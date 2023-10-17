@@ -14,6 +14,8 @@ export default function App() {
         let newArray = [...myArray];
         newArray.push({ dni: textDni, nombre: textNombre });
         setMyArray(newArray);
+        setTextDni("");
+        setTextNombre("");
     };
 
     return (
@@ -23,14 +25,14 @@ export default function App() {
                 style={{ height: 40 }}
                 placeholder="Inserta tu texto..."
                 onChangeText={(newText) => setTextDni(newText)}
-                defaultValue=""
+                defaultValue={textDni}
             />
             <Text style={{ fontSize: 40 }}>Nombre</Text>
             <TextInput
                 style={{ height: 40 }}
                 placeholder="Inserta tu texto..."
                 onChangeText={(newText) => setTextNombre(newText)}
-                defaultValue=""
+                defaultValue={textNombre}
             />
             {myArray.map((element, index) => (
                 <Text key={index.toString()}>
