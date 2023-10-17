@@ -1,99 +1,39 @@
 import { useState } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Button, View, StyleSheet, Image } from "react-native";
 
 export default function App() {
-    const [myArray, setMyArray] = useState([
-        {
-            title: "Este es mi titulo 1",
-            image: require("./assets/sunset1.jpg"),
-            text: "text1",
-        },
-        {
-            title: "Este es mi titulo 2",
-            image: require("./assets/sunset2.jpg"),
-            text: "text2",
-        },
-        {
-            title: "Este es mi titulo 3",
-            image: require("./assets/sunset3.jpg"),
-            text: "text3",
-        },
-    ]);
+    const [imageData, setImageData] = useState({});
 
-    const handleOnPress = (title) => {
-        let newArray = [...myArray];
-        if (title === "Este es mi titulo 1") {
-            newArray[0].title = "Titulo 1 cambiado";
-            setMyArray(newArray);
-            return;
-        }
-        if (title === "Titulo 1 cambiado") {
-            newArray[0].title = "Este es mi titulo 1";
-            setMyArray(newArray);
-            return;
-        }
-        if (title === "Este es mi titulo 2") {
-            newArray[1].title = "Titulo 2 cambiado";
-            setMyArray(newArray);
-            return;
-        }
-        if (title === "Titulo 2 cambiado") {
-            newArray[1].title = "Este es mi titulo 2";
-            setMyArray(newArray);
-            return;
-        }
-        if (title === "Este es mi titulo 3") {
-            newArray[2].title = "Titulo 3 cambiado";
-            setMyArray(newArray);
-            return;
-        }
-        if (title === "Titulo 3 cambiado") {
-            newArray[2].title = "Este es mi titulo 3";
-            setMyArray(newArray);
-            return;
+    const getData = async () => {
+        try {
+            const response = await fetch(
+                "https://api.thecatapi.com/v1/images/search?size=full"
+            );
+            if (response.ok) {
+                const data = await response.json();
+                setImageData(data[0]);
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
     return (
         <View style={styles.container}>
-            {myArray.map((oneElement, index) => (
-                <View key={index}>
-                    <Text
-                        style={styles.title}
-                        onPress={() => handleOnPress(oneElement.title)}
-                    >
-                        {oneElement.title}
-                    </Text>
-                    <Image
-                        style={styles.images}
-                        source={oneElement.image}
-                    ></Image>
-                    <Text style={styles.normalText}>{oneElement.text}</Text>
-                </View>
-            ))}
+            <Image
+                source={{ uri: imageData.url }}
+                style={{ height: imageData.height, width: imageData.width }}
+            />
+            <Button onPress={() => getData()} title="Pulsame!" />
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
         justifyContent: "center",
-    },
-    images: {
-        height: 170,
-        width: 300,
-    },
-    title: {
-        fontSize: 20,
-        alignSelf: "center",
-        fontWeight: "bold",
-        textDecorationLine: "underline",
-    },
-    normalText: {
-        fontSize: 15,
-        alignSelf: "center",
+        backgroundColor: "#ecf0f1",
+        padding: 8,
     },
 });
