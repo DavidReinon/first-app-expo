@@ -1,0 +1,2 @@
+Actualizar dependencias en casa (NO se actualizan automaticamente)
+npm install
