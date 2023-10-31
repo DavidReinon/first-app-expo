@@ -5,7 +5,6 @@ import Screen2 from "./src/screens/Screen2";
 
 const Tab = createBottomTabNavigator();
 
-// Ej 3
 // Aqui ponemos la navegacion 'Tab'.
 // Dentro de la carpeta src/screens usamos Screen1,
 // donde dentro de esta ponemos la navegacion 'Stack.Navigator' pero sin
