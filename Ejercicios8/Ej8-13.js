@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import Screen1 from "./Ejercicios8/src/screens/screen1";
-import Screen2 from "./Ejercicios8/src/screens/screen2";
-import Screen3 from "./Ejercicios8/src/screens/screen3";
+import Screen1 from "./Ejercicios8./src/screens/Screen1";
+import Screen2 from "./src/screens/Screen2";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +18,6 @@ const App = () => (
         <Tab.Navigator>
             <Tab.Screen name="Screen1" component={Screen1} />
             <Tab.Screen name="Screen2" component={Screen2} />
-            <Tab.Screen name="Screen3" component={Screen3} />
         </Tab.Navigator>
     </NavigationContainer>
 );
