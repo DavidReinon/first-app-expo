@@ -8,10 +8,10 @@ import {
     Dimensions,
 } from "react-native";
 
-const Screen2 = () => {
+const Screen3 = () => {
     const [imageData, setImageData] = useState({});
-    const [contador, setContador] = useState(0);
-    const screnDimension = Dimensions.get("window");
+    //-2 porque la primera vez que se asigna ╦ cuenta como 1, y con el useState predeterminado cuenta 2
+    const [contador, setContador] = useState(-2);
 
     const getData = async () => {
         try {
@@ -33,12 +33,7 @@ const Screen2 = () => {
 
     useEffect(() => {
         setContador((prevContador) => prevContador + 1);
-    }, [contador]);
-
-    const handleOnPress = () => {
-        getData();
-        setContador(contador);
-    };
+    }, [imageData]);
 
     return (
         <View style={styles.container}>
@@ -46,7 +41,7 @@ const Screen2 = () => {
                 source={{ uri: imageData.url }}
                 style={{ height: 400, width: 400 }}
             />
-            <Button onPress={() => handleOnPress()} title="Pulsame!" />
+            <Button onPress={() => getData()} title="Pulsame!" />
             <Text style={{ fontSize: 20, alignSelf: "center" }}>
                 {contador}
             </Text>
@@ -61,4 +56,4 @@ const styles = StyleSheet.create({
         padding: 8,
     },
 });
-export default Screen2;
+export default Screen3;

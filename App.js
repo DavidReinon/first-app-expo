@@ -12,7 +12,8 @@ const Tab = createBottomTabNavigator();
 // donde dentro de esta ponemos la navegacion 'Stack.Navigator' pero sin
 // envolverlo en el <NavigationContainer> porque ya la tiene esta pantalla
 // y no hace falta.
-// Luegoo ya dentro de cada componente donde ScreenStack vamos cambiando
+//
+// Luego ya dentro de cada componente donde ScreenStack vamos cambiando
 // de pantalla con 'props.navigation.navigate("ScreenStack1")' etc
 const App = () => (
     <NavigationContainer>
