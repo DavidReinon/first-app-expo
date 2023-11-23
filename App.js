@@ -1,27 +1,22 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { View } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Screen1 from "./Ejercicios8/src/screens/screen1";
-import Screen2 from "./Ejercicios8/src/screens/screen2";
-import Screen3 from "./Ejercicios8/src/screens/screen3";
+import Home from "./Ejercicios1/src/screens/Home";
+import Screen1 from "./Ejercicios1/src/screens/Screen1";
+import Screen2 from "./Ejercicios1/src/screens/Screen2";
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator options="false">
+                <Stack.Screen name="Home" component={Home}></Stack.Screen>
+                <Stack.Screen name="Screen1" component={Screen1}></Stack.Screen>
+                <Stack.Screen name="Screen2" component={Screen2}></Stack.Screen>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
 
-// Ej 3
-// Aqui ponemos la navegacion 'Tab'.
-// Dentro de la carpeta src/screens usamos Screen1,
-// donde dentro de esta ponemos la navegacion 'Stack.Navigator' pero sin
-// envolverlo en el <NavigationContainer> porque ya la tiene esta pantalla
-// y no hace falta.
-//
-// Luego ya dentro de cada componente donde ScreenStack vamos cambiando
-// de pantalla con 'props.navigation.navigate("ScreenStack1")' etc
-const App = () => (
-    <NavigationContainer>
-        <Tab.Navigator>
-            <Tab.Screen name="Screen1" component={Screen1} />
-            <Tab.Screen name="Screen2" component={Screen2} />
-            <Tab.Screen name="Screen3" component={Screen3} />
-        </Tab.Navigator>
-    </NavigationContainer>
-);
 export default App;
