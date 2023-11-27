@@ -1,0 +1,461 @@
+{
+    "data": [
+        {
+            "id": 633,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Wood",
+            "position": "",
+            "team": {
+                "id": 11,
+                "abbreviation": "HOU",
+                "city": "Houston",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "Houston Rockets",
+                "name": "Rockets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 658,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Benoit",
+            "position": "",
+            "team": {
+                "id": 29,
+                "abbreviation": "UTA",
+                "city": "Utah",
+                "conference": "West",
+                "division": "Northwest",
+                "full_name": "Utah Jazz",
+                "name": "Jazz"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 705,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Rivers",
+            "position": "",
+            "team": {
+                "id": 13,
+                "abbreviation": "LAC",
+                "city": "LA",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "LA Clippers",
+                "name": "Clippers"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 857,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Wesley",
+            "position": "",
+            "team": {
+                "id": 3,
+                "abbreviation": "BKN",
+                "city": "Brooklyn",
+                "conference": "East",
+                "division": "Atlantic",
+                "full_name": "Brooklyn Nets",
+                "name": "Nets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 984,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Vaughn",
+            "position": "",
+            "team": {
+                "id": 22,
+                "abbreviation": "ORL",
+                "city": "Orlando",
+                "conference": "East",
+                "division": "Southeast",
+                "full_name": "Orlando Magic",
+                "name": "Magic"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1188,
+            "first_name": "Kornel",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "David",
+            "position": "",
+            "team": {
+                "id": 5,
+                "abbreviation": "CHI",
+                "city": "Chicago",
+                "conference": "East",
+                "division": "Central",
+                "full_name": "Chicago Bulls",
+                "name": "Bulls"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1334,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Vanterpool",
+            "position": "",
+            "team": {
+                "id": 30,
+                "abbreviation": "WAS",
+                "city": "Washington",
+                "conference": "East",
+                "division": "Southeast",
+                "full_name": "Washington Wizards",
+                "name": "Wizards"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1481,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "West",
+            "position": "",
+            "team": {
+                "id": 19,
+                "abbreviation": "NOP",
+                "city": "New Orleans",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "New Orleans Pelicans",
+                "name": "Pelicans"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1554,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Harrison",
+            "position": "",
+            "team": {
+                "id": 12,
+                "abbreviation": "IND",
+                "city": "Indiana",
+                "conference": "East",
+                "division": "Central",
+                "full_name": "Indiana Pacers",
+                "name": "Pacers"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1641,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Lee",
+            "position": "",
+            "team": {
+                "id": 20,
+                "abbreviation": "NYK",
+                "city": "New York",
+                "conference": "East",
+                "division": "Atlantic",
+                "full_name": "New York Knicks",
+                "name": "Knicks"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1681,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Noel",
+            "position": "",
+            "team": {
+                "id": 17,
+                "abbreviation": "MIL",
+                "city": "Milwaukee",
+                "conference": "East",
+                "division": "Central",
+                "full_name": "Milwaukee Bucks",
+                "name": "Bucks"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1759,
+            "first_name": "Jermareo",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Davidson",
+            "position": "",
+            "team": {
+                "id": 4,
+                "abbreviation": "CHA",
+                "city": "Charlotte",
+                "conference": "East",
+                "division": "Southeast",
+                "full_name": "Charlotte Hornets",
+                "name": "Hornets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 1839,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Andersen",
+            "position": "",
+            "team": {
+                "id": 11,
+                "abbreviation": "HOU",
+                "city": "Houston",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "Houston Rockets",
+                "name": "Rockets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2125,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Wear",
+            "position": "",
+            "team": {
+                "id": 26,
+                "abbreviation": "SAC",
+                "city": "Sacramento",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Sacramento Kings",
+                "name": "Kings"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2401,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Thompson",
+            "position": "",
+            "team": {
+                "id": 8,
+                "abbreviation": "DEN",
+                "city": "Denver",
+                "conference": "West",
+                "division": "Northwest",
+                "full_name": "Denver Nuggets",
+                "name": "Nuggets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2557,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Britton",
+            "position": "",
+            "team": {
+                "id": 30,
+                "abbreviation": "WAS",
+                "city": "Washington",
+                "conference": "East",
+                "division": "Southeast",
+                "full_name": "Washington Wizards",
+                "name": "Wizards"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2598,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Burns",
+            "position": "",
+            "team": {
+                "id": 3,
+                "abbreviation": "BKN",
+                "city": "Brooklyn",
+                "conference": "East",
+                "division": "Atlantic",
+                "full_name": "Brooklyn Nets",
+                "name": "Nets"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2618,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Thirdkill",
+            "position": "",
+            "team": {
+                "id": 24,
+                "abbreviation": "PHX",
+                "city": "Phoenix",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Phoenix Suns",
+                "name": "Suns"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2713,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Pope",
+            "position": "",
+            "team": {
+                "id": 26,
+                "abbreviation": "SAC",
+                "city": "Sacramento",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Sacramento Kings",
+                "name": "Kings"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2722,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Cooke",
+            "position": "",
+            "team": {
+                "id": 26,
+                "abbreviation": "SAC",
+                "city": "Sacramento",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Sacramento Kings",
+                "name": "Kings"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2980,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Greenwood",
+            "position": "",
+            "team": {
+                "id": 27,
+                "abbreviation": "SAS",
+                "city": "San Antonio",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "San Antonio Spurs",
+                "name": "Spurs"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2981,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Robinson",
+            "position": "",
+            "team": {
+                "id": 27,
+                "abbreviation": "SAS",
+                "city": "San Antonio",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "San Antonio Spurs",
+                "name": "Spurs"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 3081,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Wingate",
+            "position": "",
+            "team": {
+                "id": 27,
+                "abbreviation": "SAS",
+                "city": "San Antonio",
+                "conference": "West",
+                "division": "Southwest",
+                "full_name": "San Antonio Spurs",
+                "name": "Spurs"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 666708,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Kramer",
+            "position": "G",
+            "team": {
+                "id": 24,
+                "abbreviation": "PHX",
+                "city": "Phoenix",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Phoenix Suns",
+                "name": "Suns"
+            },
+            "weight_pounds": null
+        },
+        {
+            "id": 2117,
+            "first_name": "David",
+            "height_feet": null,
+            "height_inches": null,
+            "last_name": "Stockton",
+            "position": "",
+            "team": {
+                "id": 14,
+                "abbreviation": "LAL",
+                "city": "Los Angeles",
+                "conference": "West",
+                "division": "Pacific",
+                "full_name": "Los Angeles Lakers",
+                "name": "Lakers"
+            },
+            "weight_pounds": null
+        }
+    ],
+    "meta": {
+        "total_pages": 2,
+        "current_page": 1,
+        "next_page": 2,
+        "per_page": 25,
+        "total_count": 32
+    }
+}
