@@ -64,13 +64,13 @@ const Tab1 = () => {
                         }}
                         style={styles.image}
                     />
-                    <Text styles={styles.textos}>
+                    <Text style={styles.textos}>
                         {data.results[character].name}
                     </Text>
-                    <Text styles={styles.textos}>
+                    <Text style={styles.textos}>
                         {data.results[character].species}
                     </Text>
-                    <Text styles={styles.textos}>
+                    <Text style={styles.textos}>
                         {data.results[character].status}
                     </Text>
                 </View>

@@ -6,15 +6,6 @@ import Screen3 from "./Ejercicios8/src/screens/screen3";
 
 const Tab = createBottomTabNavigator();
 
-// Ej 3
-// Aqui ponemos la navegacion 'Tab'.
-// Dentro de la carpeta src/screens usamos Screen1,
-// donde dentro de esta ponemos la navegacion 'Stack.Navigator' pero sin
-// envolverlo en el <NavigationContainer> porque ya la tiene esta pantalla
-// y no hace falta.
-//
-// Luego ya dentro de cada componente donde ScreenStack vamos cambiando
-// de pantalla con 'props.navigation.navigate("ScreenStack1")' etc
 const App = () => (
     <NavigationContainer>
         <Tab.Navigator>
@@ -25,3 +16,13 @@ const App = () => (
     </NavigationContainer>
 );
 export default App;
+
+// Ej 3
+// Aqui ponemos la navegacion 'Tab'.
+// Dentro de la carpeta src/screens usamos Screen1,
+// donde dentro de esta ponemos la navegacion 'Stack.Navigator' pero sin
+// envolverlo en el <NavigationContainer> porque ya la tiene esta pantalla
+// y no hace falta.
+//
+// Luego ya dentro de cada componente donde ScreenStack vamos cambiando
+// de pantalla con 'props.navigation.navigate("ScreenStack1")' etc
