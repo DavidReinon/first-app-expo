@@ -5,11 +5,11 @@ import {
     View,
     StyleSheet,
     Image,
-    Dimensions,
 } from "react-native";
 
 const Screen4 = () => {
     const [data, setData] = useState(null);
+    const [characterIndex, setCharacterIndex] = useState(0);
 
     const getData = async () => {
         try {
@@ -35,15 +35,16 @@ const Screen4 = () => {
                 <View style={styles.container}>
                     <Image
                         source={{
-                            uri: data.results[0].image,
+                            uri: data.results[characterIndex].image,
                         }}
                         style={styles.image}
                     />
-                    <Text style={styles.textos}>{data.results[0].name}</Text>
+                    <Text style={styles.textos}>{data.results[characterIndex].name}</Text>
                     <Text style={styles.textos}>
-                        {data.results[0].species}
+                        {data.results[characterIndex].species}
                     </Text>
-                    <Text styles={styles.textos}>{data.results[0].status}</Text>
+                    <Text styles={styles.textos}>{data.results[characterIndex].status}</Text>
+                    <Button title="Morty" onPress={() => setCharacterIndex(1)}></Button>
                 </View>
             )}
         </View>
