@@ -16,6 +16,9 @@ const Screen2 = () => {
                         return <Text key={index}>{element.definition}</Text>;
                     })} */
                     }
+                    {
+                        //Ejercicio 3:
+                    }
                     <Text>
                         {
                             data[0].meanings[0].definitions[definitionIndex]

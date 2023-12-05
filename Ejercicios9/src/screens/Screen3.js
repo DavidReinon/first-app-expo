@@ -3,14 +3,14 @@ import { View, TextInput, Button, StyleSheet } from "react-native";
 import ScreensContext from "./ScreensContext";
 import { getData } from "../services/services";
 
-const Screen1 = (props) => {
+const Screen3 = (props) => {
     const { setData } = useContext(ScreensContext);
     const [word, setWord] = useState(null);
 
     const fetchData = async () => {
         try {
             const result = await getData(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+                `https://www.balldontlie.io/api/v1/players?search=${word}`
             );
             setData(result);
         } catch (error) {
@@ -20,7 +20,7 @@ const Screen1 = (props) => {
 
     const showResult = () => {
         fetchData();
-        props.navigation.navigate("Screen2");
+        props.navigation.navigate("Screen4");
     };
     return (
         <View style={{ flex: 1, margin: 10 }}>
@@ -29,7 +29,7 @@ const Screen1 = (props) => {
                 onChangeText={(newWord) => setWord(newWord)}
             ></TextInput>
             <Button
-                color={"orange"}
+                color={"blue"}
                 title="BUSCAR"
                 onPress={() => showResult()}
             ></Button>
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
         padding: 7,
     },
 });
-export default Screen1;
+export default Screen3;
