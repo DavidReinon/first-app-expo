@@ -1,19 +1,18 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { ScreensProvider } from "./Ejercicios9/src/screens/ScreensContext";
-import Screen3 from "./Ejercicios9/src/screens/Screen3";
-import Screen4 from "./Ejercicios9/src/screens/Screen4";
+import Ejercicio1 from "./Ejercicios10Audio/src/screens/Ejercicio1";
+import Ejercicio2 from "./Ejercicios10Audio/src/screens/Ejercicio2";
+import Ejercicio3 from "./Ejercicios10Audio/src/screens/Ejercicio3";
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => (
-    <ScreensProvider>
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Screen3" component={Screen3} />
-                <Stack.Screen name="Screen4" component={Screen4} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    </ScreensProvider>
+    <NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name="Ejercicio1" component={Ejercicio1} />
+            <Tab.Screen name="Ejercicio2" component={Ejercicio2} />
+            <Tab.Screen name="Ejercicio3" component={Ejercicio3} />
+        </Tab.Navigator>
+    </NavigationContainer>
 );
 export default App;
