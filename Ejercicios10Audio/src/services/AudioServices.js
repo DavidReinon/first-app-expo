@@ -1,12 +1,16 @@
 import { Audio } from "expo-av";
 
 const playLocalSound = async (audioLink) => {
-    const { sound } = await Audio.Sound.createAsync(audioLink);
-    await sound.playAsync();
+    try {
+        const { sound } = await Audio.Sound.createAsync(audioLink);
+        await sound.playAsync();
+    } catch (error) {
+        console.error("No se pudo reproducir audio");
+    }
 };
 
-export default playLocalSound;
 //export {playLocalSound} //para componentes no defualt
+export default playLocalSound;
 
 const saveSound = async (audioLink) => {
     return await Audio.Sound.createAsync(audioLink);
