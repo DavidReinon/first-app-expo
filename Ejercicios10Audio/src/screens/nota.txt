@@ -1,0 +1,8 @@
+Estos ejercicios estan dividios en dos bloques.
+Primer bloque 3 act.
+Segundo bloque 4 act.
+
+Lo hago todo en una misma actividad (por asi decirlo) y las pantallas del 
+segundo bloque estan junto al primero y empiezan a partir de la Ejercicio3.
+Es decir la pantalla Ejercicio 4 es el ejercicio uno del segundo bloque.
+Y asi sucesivamente.
