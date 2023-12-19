@@ -16,21 +16,24 @@ import playLocalSound from "../services/AudioServices";
 
 const Ejercicio3 = () => {
     const rutaAudio = "../../EnunciadoAudio/beatbox/drumkit/";
-    const audios = [];
-
-    for (let i = 0; i < 4; i++) {
-        audios.push(`${rutaAudio}/chh${i + 1}.wav`);
-    }
-    for (let i = 0; i < 4; i++) {
-        audios.push(`${rutaAudio}/dr_tb_${i + 1}.wav`);
-    }
-    for (let i = 0; i < 3; i++) {
-        audios.push(`${rutaAudio}/kk${i + 1}.wav`);
-    }
-    audios.push(`${rutaAudio}/lo-fi-cow.wav`);
-    for (let i = 0; i < 4; i++) {
-        audios.push(`${rutaAudio}/sn${i + 1}.wav`);
-    }
+    const audios = [
+        require(rutaAudio + "/chh1.wav"),
+        require(rutaAudio + "/chh2.wav"),
+        require(rutaAudio + "/chh3.wav"),
+        require(rutaAudio + "/chh4.wav"),
+        require(rutaAudio + "/dr_tb_1.wav"),
+        require(rutaAudio + "/dr_tb_2.wav"),
+        require(rutaAudio + "/dr_tb_3.wav"),
+        require(rutaAudio + "/dr_tb_4.wav"),
+        require(rutaAudio + "/kk1.wav"),
+        require(rutaAudio + "/kk2.wav"),
+        require(rutaAudio + "/kk3.wav"),
+        require(rutaAudio + "/lo-fi-cow.wav"),
+        require(rutaAudio + "/sn1.wav"),
+        require(rutaAudio + "/sn2.wav"),
+        require(rutaAudio + "/sn3.wav"),
+        require(rutaAudio + "/sn4.wav"),
+    ];
 
     // useEffect(() => {
     //     return sound
@@ -64,9 +67,7 @@ const Ejercicio3 = () => {
                                     <View style={{ padding: 3 }} key={index}>
                                         <Button
                                             onPress={async () =>
-                                                await playLocalSound(
-                                                    require(audio.toString())
-                                                )
+                                                await playLocalSound(audio)
                                             }
                                             size="20"
                                             mt="-1"
