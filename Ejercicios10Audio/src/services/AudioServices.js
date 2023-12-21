@@ -47,6 +47,35 @@ const resumeAudio = async (sound) => {
     }
 };
 
+const startRecording = async () => {
+    try {
+        await Audio.requestPermissionsAsync();
+        await Audio.setAudioModeAsync({
+            allowsRecordingIOS: true,
+            playsInSilentModeIOS: true,
+        });
+        const { recording } = await Audio.Recording.createAsync(
+            Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+        );
+        return recording; //recording
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const stopRecording = async (recording) => {
+    await recording.stopAndUnloadAsync();
+    return recording.getURI(); //uri del recording (para reproducirlo despues)
+};
+
 //export {playLocalSound} //para componentes no defualt
 export default playLocalSound;
-export { saveSound, playSavedSound, pauseAudio, stopAudio, resumeAudio };
+export {
+    saveSound,
+    playSavedSound,
+    pauseAudio,
+    stopAudio,
+    resumeAudio,
+    startRecording,
+    stopRecording,
+};
