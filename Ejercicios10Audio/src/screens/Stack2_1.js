@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ScreensContext from "./ScreensContext";
 import { saveSound } from "../services/AudioServices";
 
-const Tab2_1 = (props) => {
+const Stack2_1 = (props) => {
     const { setAudio } = useContext(ScreensContext);
 
     const playAudioOnOtherScreen = async () => {
@@ -20,4 +20,4 @@ const Tab2_1 = (props) => {
     );
 };
 
-export default Tab2_1;
+export default Stack2_1;

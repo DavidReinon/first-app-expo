@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScreensProvider } from "./ScreensContext";
-import Tab2_1 from "./Tab2_1";
-import Tab2_2 from "./Tab2_2";
+import Tab2_1 from "./Stack2_1";
+import Tab2_2 from "./Stack2_2";
 
 const Stack = createStackNavigator();
 

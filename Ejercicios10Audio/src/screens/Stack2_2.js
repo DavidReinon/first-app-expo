@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import ScreensContext from "./ScreensContext";
 import { playSavedSound } from "../services/AudioServices";
 
-const Tab2_2 = () => {
+const Stack2_2 = () => {
     const { audio } = useContext(ScreensContext);
 
     useEffect(() => {
@@ -19,4 +19,4 @@ const Tab2_2 = () => {
     );
 };
 
-export default Tab2_2;
+export default Stack2_2;
