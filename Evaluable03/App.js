@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Definitions from './src/screens/tab/Definitions';
-import Listening from './src/screens/tab/Listening';
-import FillInTheGaps from './src/screens/tab/FillInTheGaps';
-import Synonyms from './src/screens/tab/Synonyms';
+import Definitions from './Evaluable03/src/screens/tab/Definitions';
+import Listening from './Evaluable03/src/screens/tab/Listening';
+import FillInTheGaps from './Evaluable03/src/screens/tab/FillInTheGaps';
+import Synonyms from './Evaluable03/src/screens/tab/Synonyms';
 
 const Tab = createBottomTabNavigator();
 const App = () => (
