@@ -5,6 +5,7 @@ import Stack5_2 from "./Stack5_2";
 
 const Stack = createStackNavigator();
 
+//Ejercicio 2: bloque actividades audio 2
 const Ejercicio5 = () => (
     <ScreensProvider>
         <Stack.Navigator>
