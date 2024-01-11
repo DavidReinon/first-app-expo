@@ -7,12 +7,15 @@ export default function FillInTheGaps() {
     const levelTwo = data[0].levelTwo;
     const [enunciado, setEnuciado] = useState(null);
 
-    const randomWord = (number) => {
+    const randomNumber = (number) => {
         if (Number(number) === 1) {
             return Math.floor(Math.random() * levelOne.adjectives.length); //0-5
         }
         return Math.floor(Math.random() * levelTwo.adjectives.length); //0-7
     };
+
+    const firstRandom = randomNumber(1);
+    setEnuciado(levelOne.sentences[firstRandom]);
 
     return (
         <View
@@ -31,7 +34,7 @@ export default function FillInTheGaps() {
                             fontWeight: "bold",
                         }}
                     >
-                        {}
+                        {enunciado}
                     </Text>
                 </View>
             </View>
