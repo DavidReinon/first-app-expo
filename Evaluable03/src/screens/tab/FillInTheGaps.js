@@ -7,6 +7,7 @@ export default function FillInTheGaps() {
     const levelOne = data[0].levelOne;
     const levelTwo = data[0].levelTwo;
     const [sentence, setSentence] = useState(null);
+    const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
 
     const randomNumber = (number) => {
@@ -15,8 +16,12 @@ export default function FillInTheGaps() {
         }
         return Math.floor(Math.random() * levelTwo.adjectives.length); //0-7
     };
+    const correctAnswer = () => {
+        return adjective === userAnswer;
+    };
 
     const firstRandom = randomNumber(1);
+    setAdjective(firstRandom);
     setSentence(levelOne.sentences[firstRandom]);
 
     return (
@@ -64,7 +69,7 @@ export default function FillInTheGaps() {
                     height: 80,
                     width: 200,
                 }}
-                //onPress={() => }
+                onPress={correctAnswer}
             >
                 <Text style={{ fontSize: 20, color: "white" }}>Check!</Text>
             </TouchableOpacity>
