@@ -1,11 +1,13 @@
 import { TouchableOpacity, Text, TextInput, View } from "react-native";
 import { useEffect, useState } from "react";
+import { useSafeArea } from "native-base";
 
 export default function FillInTheGaps() {
     const data = require("../../utils/fill_in_the_gaps.json");
     const levelOne = data[0].levelOne;
     const levelTwo = data[0].levelTwo;
-    const [enunciado, setEnuciado] = useState(null);
+    const [sentence, setSentence] = useState(null);
+    const [userAnswer, setUserAnswer] = useState(null);
 
     const randomNumber = (number) => {
         if (Number(number) === 1) {
@@ -15,7 +17,7 @@ export default function FillInTheGaps() {
     };
 
     const firstRandom = randomNumber(1);
-    setEnuciado(levelOne.sentences[firstRandom]);
+    setSentence(levelOne.sentences[firstRandom]);
 
     return (
         <View
@@ -34,7 +36,7 @@ export default function FillInTheGaps() {
                             fontWeight: "bold",
                         }}
                     >
-                        {enunciado}
+                        {sentence}
                     </Text>
                 </View>
             </View>
@@ -49,7 +51,8 @@ export default function FillInTheGaps() {
                     height: 80,
                     width: 200,
                 }}
-                value={"Hola"}
+                onChangeText={(text) => setUserAnswer(text)}
+                value={userAnswer}
             />
             <TouchableOpacity
                 style={{
@@ -61,6 +64,7 @@ export default function FillInTheGaps() {
                     height: 80,
                     width: 200,
                 }}
+                //onPress={() => }
             >
                 <Text style={{ fontSize: 20, color: "white" }}>Check!</Text>
             </TouchableOpacity>
