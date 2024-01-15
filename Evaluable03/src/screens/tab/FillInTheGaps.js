@@ -6,9 +6,12 @@ export default function FillInTheGaps() {
     const data = require("../../utils/fill_in_the_gaps.json");
     const levelOne = data[0].levelOne;
     const levelTwo = data[0].levelTwo;
+
+    const [tries, setTries] = useState(0);
+    const [level, setLevel] = useState(0);
     const [sentence, setSentence] = useState(null);
     const [adjective, setAdjective] = useState(null);
-    const [userAnswer, setUserAnswer] = useState(null);
+    const [userAnswer, setUserAnswer] = useState("");
 
     const randomNumber = (number) => {
         if (Number(number) === 1) {
@@ -16,13 +19,48 @@ export default function FillInTheGaps() {
         }
         return Math.floor(Math.random() * levelTwo.adjectives.length); //0-7
     };
+
+    const generateLevel = (number) => {
+        const random = randomNumber(number);
+        if (number === 1) {
+            setLevel(number);
+            setAdjective(levelOne.adjectives[random]);
+            setSentence(levelOne.sentences[random]);
+            return;
+        }
+        if (number === 2) {
+            setLevel(number);
+            setAdjective(levelTwo.adjectives[random]);
+            setSentence(levelTwo.sentences[random]);
+            return;
+        }
+    };
     const correctAnswer = () => {
-        return adjective === userAnswer;
+        if (adjective === userAnswer.toLowerCase()) {
+            if (level === 2) {
+                alert("You WIN!!, Try Again");
+                setTries(0);
+                generateLevel(1);
+                setLevel(1);
+                return;
+            }
+            generateLevel(2);
+            setLevel(2);
+            return;
+        }
+        if (tries === 2) {
+            alert("You Lost, Try Again");
+            setTries(0);
+            generateLevel(1);
+            return;
+        }
+        alert("Incorrect, you have other oportunity");
+        setTries(tries + 1);
     };
 
-    const firstRandom = randomNumber(1);
-    setAdjective(firstRandom);
-    setSentence(levelOne.sentences[firstRandom]);
+    useEffect(() => {
+        generateLevel(1);
+    }, []);
 
     return (
         <View
