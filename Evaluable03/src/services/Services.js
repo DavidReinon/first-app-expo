@@ -14,6 +14,18 @@ const getData = async (url) => {
 
 export { getData };
 
+const playUriSound = async (audioLink) => {
+    try {
+        const { sound } = await Audio.Sound.createAsync(
+            { uri: audioLink } // Cambia para usar el enlace URI directamente
+        );
+        await sound.playAsync();
+    } catch (error) {
+        console.error("No se pudo reproducir audio");
+    }
+};
+
+
 const playLocalSound = async (audioLink) => {
     try {
         const { sound } = await Audio.Sound.createAsync(audioLink);
@@ -86,6 +98,7 @@ const stopRecording = async (recording) => {
 export default playLocalSound;
 export {
     saveSound,
+    playUriSound,
     playSavedSound,
     pauseAudio,
     stopAudio,
