@@ -116,7 +116,10 @@ export default function Listening() {
             style={{
                 flexDirection: "row",
                 justifyContent: "center",
-                padding: 20,
+                flexWrap: "wrap",
+                flex: 1,
+                paddingHorizontal: levels[0] === level ? 90 : 30,
+                paddingVertical: 30,
             }}
         >
             {adjectivesRandomList != null &&
@@ -132,6 +135,7 @@ export default function Listening() {
                                 width: 80,
                                 height: 80,
                                 backgroundColor: "blue",
+                                margin: 5,
                             }}
                             onPress={() => setUserAnswer(element)}
                         >
