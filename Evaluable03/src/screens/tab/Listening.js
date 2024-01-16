@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import { getData, playUriSound } from "../../services/Services";
-import * as allData from "../../utils/fill_in_the_gaps.json";
+import * as allData from "../../utils/listening.json";
 const data = allData[0];
 
 export default function Listening() {
@@ -16,10 +16,24 @@ export default function Listening() {
         .map((level) => Number(level))
         .sort((a, b) => a - b);
 
+    const boxes = Object.keys(levelTranslator)
+        .map((level) => (Number(level) + 1) * 2)
+        .sort((a, b) => a - b);
+
     const [tries, setTries] = useState(0);
     const [level, setLevel] = useState(1);
+    const [adjectivesRandomList, setAdjectivesRandomList] = useState(null);
     const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
+
+    useEffect(() => {
+        if (!adjectivesRandomList) return;
+
+        const randomAdjective = Math.floor(
+            Math.random() * adjectivesRandomList.length
+        );
+        setAdjective(adjectivesRandomList[randomAdjective]);
+    }, [adjectivesRandomList]);
 
     useEffect(() => {
         if (tries > 0 && tries < maxTries)
@@ -45,7 +59,13 @@ export default function Listening() {
         getAudio();
     }, [adjective]);
 
-    //useEffect(() => generateLevel(levels[0]), []);
+    useEffect(() => {
+        if (!userAnswer) return;
+
+        correctAnswer();
+    }, [userAnswer]);
+
+    useEffect(() => generateLevel(levels[0]), []);
 
     const resetAnswer = () => {
         setTries((prev) => prev + 1);
@@ -59,17 +79,27 @@ export default function Listening() {
         generateLevel(levels[0]);
     };
 
-    //Change
-    const generateLevel = (number) => {
-        const random = randomNumber(number);
-        const levelData = levelTranslator[number]; //Array con las palabras
+    const generateRandomAdjectivesList = (numberLevel) => {
+        const eliminatingNumber =
+            levelTranslator[numberLevel].length - boxes[numberLevel - 1];
 
+        let newArray = [...levelTranslator[numberLevel]];
+        // Algoritmo de mezcla Fisher-Yates
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        newArray.splice(0, eliminatingNumber);
+
+        setAdjectivesRandomList(newArray);
+    };
+
+    const generateLevel = (number) => {
         setLevel(number);
-        setAdjective(levelData[random]);
+        generateRandomAdjectivesList(number);
         setUserAnswer(null);
     };
 
-    //Change
     const correctAnswer = () => {
         const isSuccess = adjective === userAnswer.toLowerCase();
 
@@ -82,37 +112,33 @@ export default function Listening() {
     };
 
     return (
-        <View style={{ flexDirection: "row" }}>
-            <View style={{ padding: 2 }}>
-                <TouchableOpacity
-                    style={{
-                        borderRadius: 8,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlignVertical: "center",
-                        width: 80,
-                        height: 80,
-                        backgroundColor: "blue",
-                    }}
-                >
-                    <Text style={{ color: "white" }}>Hola</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ padding: 2 }}>
-                <TouchableOpacity
-                    style={{
-                        borderRadius: 8,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlignVertical: "center",
-                        width: 80,
-                        height: 80,
-                        backgroundColor: "blue",
-                    }}
-                >
-                    <Text style={{ color: "white" }}>Hola</Text>
-                </TouchableOpacity>
-            </View>
+        <View
+            style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                padding: 20,
+            }}
+        >
+            {adjectivesRandomList != null &&
+                adjectivesRandomList.map((element, index) => {
+                    return (
+                        <TouchableOpacity
+                            key={index}
+                            style={{
+                                borderRadius: 8,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                textAlignVertical: "center",
+                                width: 80,
+                                height: 80,
+                                backgroundColor: "blue",
+                            }}
+                            onPress={() => setUserAnswer(element)}
+                        >
+                            <Text style={{ color: "white" }}>{element}</Text>
+                        </TouchableOpacity>
+                    );
+                })}
         </View>
     );
 }
