@@ -41,7 +41,9 @@ export default function FillInTheGaps() {
 
     useEffect(() => {
         if (tries > 0 && tries < maxTries)
-            alert(`Incorrect, you have ${maxTries - tries} oportunities left`);
+            return alert(
+                `Incorrect, you have ${maxTries - tries} oportunities left`
+            );
         if (tries === maxTries) return resetGame("You Lost, Try Again");
     }, [tries]);
 
