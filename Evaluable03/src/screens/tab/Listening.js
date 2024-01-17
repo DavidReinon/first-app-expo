@@ -27,50 +27,6 @@ export default function Listening() {
     const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
 
-    const changeRandomAdjectivesList = () => {
-        setAdjectivesRandomList((prevList) => {
-            const newList = prevList.map(() => {
-                return getRandomWord();
-            });
-            return newList;
-        });
-    };
-
-    // Función para obtener una palabra aleatoria del nivel actual
-    const getRandomWord = () => {
-        if (!adjectivesRandomList) return;
-
-        const randomIndex = Math.floor(
-            Math.random() * levelTranslator[level].length
-        );
-        return levelTranslator[level][randomIndex];
-    };
-
-    useEffect(() => {
-        if (!adjectivesRandomList) return;
-
-        const randomAdjective = Math.floor(
-            Math.random() * adjectivesRandomList.length
-        );
-        setAdjective(adjectivesRandomList[randomAdjective]);
-
-        const initialRandomList = [...adjectivesRandomList];
-
-        const intervalId = setInterval(() => {
-            changeRandomAdjectivesList();
-        }, 100);
-
-        const timeoutId = setTimeout(() => {
-            clearInterval(intervalId); // Detener la animación después de 3 segundos
-        }, 3000);
-
-        return () => {
-            clearInterval(intervalId);
-            clearTimeout(timeoutId);
-            setAdjectivesRandomList(initialRandomList);
-        };
-    }, [adjectivesRandomList]);
-
     useEffect(() => {
         if (tries > 0 && tries < maxTries)
             return alert(
@@ -91,8 +47,23 @@ export default function Listening() {
                 console.error("Invalid API Data structure");
             }
         };
-
         getAudio();
+
+        const initialRandomList = [...adjectivesRandomList];
+
+        const intervalId = setInterval(() => {
+            changeRandomAdjectivesList();
+        }, 100);
+
+        const timeoutId = setTimeout(() => {
+            clearInterval(intervalId);
+            setAdjectivesRandomList(initialRandomList);
+        }, 3000);
+
+        return () => {
+            clearInterval(intervalId);
+            clearTimeout(timeoutId);
+        };
     }, [adjective]);
 
     useEffect(() => {
@@ -115,6 +86,30 @@ export default function Listening() {
         generateLevel(levels[0]);
     };
 
+    const getRandomWord = () => {
+        if (!adjectivesRandomList) return;
+
+        const randomIndex = Math.floor(
+            Math.random() * levelTranslator[level].length
+        );
+        return levelTranslator[level][randomIndex];
+    };
+
+    const changeRandomAdjectivesList = () => {
+        setAdjectivesRandomList((prevList) => {
+            const newList = prevList.map(() => {
+                return getRandomWord();
+            });
+            return newList;
+        });
+    };
+
+    const selectAdjectiveAnswer = (adjectivesList) => {
+        const randomAdjective = Math.floor(
+            Math.random() * adjectivesList.length
+        );
+        setAdjective(adjectivesList[randomAdjective]);
+    };
     const generateRandomAdjectivesList = (numberLevel) => {
         const columns = gridConfig[numberLevel].columns;
         const eliminatingNumber =
@@ -128,6 +123,7 @@ export default function Listening() {
         }
         newArray.splice(0, eliminatingNumber);
 
+        selectAdjectiveAnswer(newArray);
         setAdjectivesRandomList(newArray);
     };
 
