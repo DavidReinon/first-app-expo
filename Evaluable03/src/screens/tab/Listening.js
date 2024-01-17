@@ -143,7 +143,8 @@ export default function Listening() {
 
         return resetGame("You WIN!!, Try Again");
     };
-
+    //tries === 0 ? TryAGain : (Normal)
+    //Cambiar useEffect de inicio
     return (
         <View
             style={{
