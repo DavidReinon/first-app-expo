@@ -16,9 +16,10 @@ export default function Listening() {
         .map((level) => Number(level))
         .sort((a, b) => a - b);
 
-    const boxes = Object.keys(levelTranslator)
-        .map((level) => (Number(level) + 1) * 2)
-        .sort((a, b) => a - b);
+    const gridConfig = {
+        1: { columns: 2, paddingHorizontal: 90 },
+        2: { columns: 3, paddingHorizontal: 30 },
+    };
 
     const [tries, setTries] = useState(0);
     const [level, setLevel] = useState(1);
@@ -80,8 +81,9 @@ export default function Listening() {
     };
 
     const generateRandomAdjectivesList = (numberLevel) => {
+        const columns = gridConfig[numberLevel].columns;
         const eliminatingNumber =
-            levelTranslator[numberLevel].length - boxes[numberLevel - 1];
+            levelTranslator[numberLevel].length - columns * columns;
 
         let newArray = [...levelTranslator[numberLevel]];
         // Algoritmo de mezcla Fisher-Yates
@@ -118,7 +120,7 @@ export default function Listening() {
                 justifyContent: "center",
                 flexWrap: "wrap",
                 flex: 1,
-                paddingHorizontal: levels[0] === level ? 90 : 30,
+                paddingHorizontal: gridConfig[level].paddingHorizontal,
                 paddingVertical: 30,
             }}
         >
