@@ -27,6 +27,25 @@ export default function Listening() {
     const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
 
+    const changeRandomAdjectivesList = () => {
+        setAdjectivesRandomList((prevList) => {
+            const newList = prevList.map(() => {
+                return getRandomWord();
+            });
+            return newList;
+        });
+    };
+
+    // Función para obtener una palabra aleatoria del nivel actual
+    const getRandomWord = () => {
+        if (!adjectivesRandomList) return;
+
+        const randomIndex = Math.floor(
+            Math.random() * levelTranslator[level].length
+        );
+        return levelTranslator[level][randomIndex];
+    };
+
     useEffect(() => {
         if (!adjectivesRandomList) return;
 
@@ -34,6 +53,22 @@ export default function Listening() {
             Math.random() * adjectivesRandomList.length
         );
         setAdjective(adjectivesRandomList[randomAdjective]);
+
+        const initialRandomList = [...adjectivesRandomList];
+
+        const intervalId = setInterval(() => {
+            changeRandomAdjectivesList();
+        }, 100);
+
+        const timeoutId = setTimeout(() => {
+            clearInterval(intervalId); // Detener la animación después de 3 segundos
+        }, 3000);
+
+        return () => {
+            clearInterval(intervalId);
+            clearTimeout(timeoutId);
+            setAdjectivesRandomList(initialRandomList);
+        };
     }, [adjectivesRandomList]);
 
     useEffect(() => {
