@@ -27,6 +27,7 @@ export default function Listening() {
     const [adjectivesRandomList, setAdjectivesRandomList] = useState(null);
     const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
+    
     useEffect(() => {
         if (!startGame) return;
 
