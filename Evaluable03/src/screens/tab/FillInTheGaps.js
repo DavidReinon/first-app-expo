@@ -80,7 +80,6 @@ export default function FillInTheGaps() {
         if (alertMessage) alert(alertMessage);
 
         setTries(0);
-        //generateLevel(levels[0]);
     };
 
     const correctAnswer = () => {

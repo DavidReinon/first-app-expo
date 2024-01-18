@@ -21,11 +21,17 @@ export default function Listening() {
         2: { columns: 3, paddingHorizontal: 30 },
     };
 
+    const [startGame, setStartGame] = useState(true);
     const [tries, setTries] = useState(0);
     const [level, setLevel] = useState(1);
     const [adjectivesRandomList, setAdjectivesRandomList] = useState(null);
     const [adjective, setAdjective] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
+    useEffect(() => {
+        if (!startGame) return;
+
+        generateLevel(levels[0]);
+    }, [startGame]);
 
     useEffect(() => {
         if (tries > 0 && tries < maxTries)
@@ -80,10 +86,10 @@ export default function Listening() {
     };
 
     const resetGame = (alertMessage) => {
+        setStartGame(false);
         if (alertMessage) alert(alertMessage);
 
         setTries(0);
-        generateLevel(levels[0]);
     };
 
     const getRandomWord = () => {
@@ -143,8 +149,27 @@ export default function Listening() {
 
         return resetGame("You WIN!!, Try Again");
     };
-    //tries === 0 ? TryAGain : (Normal)
-    //Cambiar useEffect de inicio
+
+    const tryAgainComponent = () => {
+        return (
+            <TouchableOpacity
+                style={{
+                    borderRadius: 8,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlignVertical: "center",
+                    width: 80,
+                    height: 80,
+                    backgroundColor: "blue",
+                    margin: 5,
+                }}
+                onPress={() => setStartGame(true)}
+            >
+                <Text style={{ fontSize: 20, color: "white" }}>Try Again</Text>
+            </TouchableOpacity>
+        );
+    };
+
     return (
         <View
             style={{
@@ -156,27 +181,29 @@ export default function Listening() {
                 paddingVertical: 30,
             }}
         >
-            {adjectivesRandomList != null &&
-                adjectivesRandomList.map((element, index) => {
-                    return (
-                        <TouchableOpacity
-                            key={index}
-                            style={{
-                                borderRadius: 8,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                textAlignVertical: "center",
-                                width: 80,
-                                height: 80,
-                                backgroundColor: "blue",
-                                margin: 5,
-                            }}
-                            onPress={() => setUserAnswer(element)}
-                        >
-                            <Text style={{ color: "white" }}>{element}</Text>
-                        </TouchableOpacity>
-                    );
-                })}
+            {startGame
+                ? adjectivesRandomList != null &&
+                  adjectivesRandomList.map((element, index) => {
+                      return (
+                          <TouchableOpacity
+                              key={index}
+                              style={{
+                                  borderRadius: 8,
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  textAlignVertical: "center",
+                                  width: 80,
+                                  height: 80,
+                                  backgroundColor: "blue",
+                                  margin: 5,
+                              }}
+                              onPress={() => setUserAnswer(element)}
+                          >
+                              <Text style={{ color: "white" }}>{element}</Text>
+                          </TouchableOpacity>
+                      );
+                  })
+                : tryAgainComponent()}
         </View>
     );
 }
