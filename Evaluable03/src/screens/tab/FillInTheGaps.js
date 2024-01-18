@@ -15,6 +15,7 @@ export default function FillInTheGaps() {
         .map((level) => Number(level))
         .sort((a, b) => a - b);
 
+    const [startGame, setStartGame] = useState(true);
     const [tries, setTries] = useState(0);
     const [level, setLevel] = useState(1);
     const [sentence, setSentence] = useState(null);
@@ -47,6 +48,12 @@ export default function FillInTheGaps() {
         if (tries === maxTries) return resetGame("You Lost, Try Again");
     }, [tries]);
 
+    useEffect(() => {
+        if (!startGame) return;
+
+        generateLevel(levels[0]);
+    }, [startGame]);
+
     const randomNumber = (number) => {
         return Math.floor(
             Math.random() * levelTranslator[number].adjectives.length
@@ -69,10 +76,11 @@ export default function FillInTheGaps() {
     };
 
     const resetGame = (alertMessage) => {
+        setStartGame(false);
         if (alertMessage) alert(alertMessage);
 
         setTries(0);
-        generateLevel(levels[0]);
+        //generateLevel(levels[0]);
     };
 
     const correctAnswer = () => {
@@ -86,6 +94,26 @@ export default function FillInTheGaps() {
         return resetGame("You WIN!!, Try Again");
     };
 
+    const tryAgainComponent = () => {
+        return (
+            <TouchableOpacity
+                style={{
+                    borderRadius: 8,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlignVertical: "center",
+                    width: 80,
+                    height: 80,
+                    backgroundColor: "blue",
+                    margin: 5,
+                }}
+                onPress={() => setStartGame(true)}
+            >
+                <Text style={{ fontSize: 20, color: "white" }}>Try Again</Text>
+            </TouchableOpacity>
+        );
+    };
+
     return (
         <View
             style={{
@@ -96,45 +124,53 @@ export default function FillInTheGaps() {
                 rowGap: 20,
             }}
         >
-            <Text
-                style={{
-                    fontSize: 15,
-                    color: "black",
-                    fontWeight: "bold",
-                }}
-            >
-                {sentence}
-            </Text>
-            <TextInput
-                style={{
-                    color: "black",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlignVertical: "center",
-                    height: 30,
-                    width: 200,
-                    textAlign: "center",
-                    borderBottomColor: "black",
-                    borderBottomWidth: 2,
-                }}
-                onChangeText={(text) => setUserAnswer(text)}
-                value={userAnswer}
-            />
-            <TouchableOpacity
-                style={{
-                    borderRadius: 8,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlignVertical: "center",
-                    backgroundColor: !userAnswer ? "grey" : "black",
-                    height: 60,
-                    width: 200,
-                }}
-                onPress={correctAnswer}
-                disabled={!userAnswer}
-            >
-                <Text style={{ fontSize: 20, color: "white" }}>Check!</Text>
-            </TouchableOpacity>
+            {startGame ? (
+                <View>
+                    <Text
+                        style={{
+                            fontSize: 15,
+                            color: "black",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {sentence}
+                    </Text>
+                    <TextInput
+                        style={{
+                            color: "black",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlignVertical: "center",
+                            height: 30,
+                            width: 200,
+                            textAlign: "center",
+                            borderBottomColor: "black",
+                            borderBottomWidth: 2,
+                        }}
+                        onChangeText={(text) => setUserAnswer(text)}
+                        value={userAnswer}
+                    />
+                    <TouchableOpacity
+                        style={{
+                            borderRadius: 8,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlignVertical: "center",
+                            backgroundColor: !userAnswer ? "grey" : "black",
+                            height: 60,
+                            width: 200,
+                        }}
+                        onPress={correctAnswer}
+                        disabled={!userAnswer}
+                    >
+                        <Text style={{ fontSize: 20, color: "white" }}>
+                            Check!
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                tryAgainComponent()
+            )}
         </View>
     );
 }
