@@ -1,86 +1,150 @@
-import { TouchableOpacity, Text, View, Alert } from "react-native";
+import { TouchableOpacity, Text, View, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Audio } from "expo-av";
-import { getData } from "../../services/Services";
-import * as data from "../../utils/synonyms.json";
+import { getData, playUriSound } from "../../services/Services";
+import * as allData from "../../utils/synonyms.json";
+const data = allData[0];
 
 export default function Synonyms() {
-    const [randomAdjective, setRandomAdjective] = useState("");
-    const [synonyms, setSynonyms] = useState([]);
-    const [correctSynonym, setCorrectSynonym] = useState("");
-    const [result, setResult] = useState("");
-    const [attempts, setAttempts] = useState(0);
+    const maxTries = 3;
+    const urlApi = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+    const levelTranslator = {
+        1: data.levelOne, //Array directo (solo adjetivos)
+        2: data.levelTwo, //Array directo (solo adjetivos)
+    };
+
+    const levels = Object.keys(levelTranslator)
+        .map((level) => Number(level))
+        .sort((a, b) => a - b);
+
+    const [startGame, setStartGame] = useState(true);
+    const [tries, setTries] = useState(0);
+    const [level, setLevel] = useState(1);
+    const [randomAdjective, setRandomAdjective] = useState(null);
+    const [correctSynonym, setCorrectSynonym] = useState(null);
+    const [synonyms, setSynonyms] = useState(null);
 
     useEffect(() => {
-        getRandomAdjective();
+        if (!startGame) return;
+
+        generateLevel(levels[0]);
+    }, [startGame]);
+
+    useEffect(() => {
+        if (tries > 0 && tries < maxTries)
+            return alert(
+                `Incorrect, you have ${maxTries - tries} oportunities left`
+            );
+        if (tries === maxTries) return resetGame("You Lost, Try Again");
+    }, [tries]);
+
+    useEffect(() => {
+        generateLevel(levels[0]);
     }, []);
 
     useEffect(() => {
-        if (randomAdjective !== "") {
-            getSynonyms(randomAdjective);
-        }
+        if (!randomAdjective) return;
+
+        const getAudio = async () => {
+            try {
+                const apiData = await getData(urlApi + randomAdjective || "");
+                if (apiData && apiData.length > 0 && apiData[0].phonetics) {
+                    const linkAudio = apiData[0].phonetics[0].audio;
+
+                    playUriSound(linkAudio);
+                    setCorrectSynonym(apiData[0].meanings[0].synonyms[0]);
+                } else {
+                    console.error("Invalid API Data structure");
+                }
+            } catch (error) {
+                console.error("Error al obtener audio:", error);
+            }
+        };
+
+        getAudio();
     }, [randomAdjective]);
 
-    const getRandomAdjective = () => {
-        const levelOneAdjectives = data[0].levelOne;
-        const randomIndex = Math.floor(
-            Math.random() * levelOneAdjectives.length
-        );
-        const randomAdjective = levelOneAdjectives[randomIndex];
-        setRandomAdjective(randomAdjective);
-    };
+    const fetchSynonyms = async (level) => {
+        if (!levelTranslator[level]) {
+            console.error("Invalid level:", level);
+            return;
+        }
+        let synonymsArray = [];
 
-    const getSynonyms = (searchTerm) => {
-        const synonymsArray = [...data[0].levelTwo]; // Cambié a levelTwo para mostrar palabras del nivel dos
-        const randomIndex = Math.floor(Math.random() * synonymsArray.length);
-        const correctSynonym = synonymsArray[randomIndex];
+        for (let adjective of levelTranslator[level]) {
+            try {
+                const apiData = await getData(urlApi + adjective);
 
-        // Asignamos el sinónimo correcto al estado
-        setCorrectSynonym(correctSynonym);
+                if (
+                    apiData &&
+                    apiData.length > 0 &&
+                    apiData[0].meanings &&
+                    apiData[0].meanings.length > 0 &&
+                    apiData[0].meanings[0].synonyms &&
+                    apiData[0].meanings[0].synonyms.length > 0
+                ) {
+                    synonymsArray.push(apiData[0].meanings[0].synonyms[0]);
+                }
+            } catch (error) {
+                console.error("Error fetching synonym for", adjective, error);
+            }
+        }
 
-        // Barajamos el array de sinónimos
-        synonymsArray.sort(() => Math.random() - 0.5);
-
-        // Asignamos el array barajado al estado
         setSynonyms(synonymsArray);
     };
 
-    const handleSynonymPress = (selectedSynonym) => {
-        if (selectedSynonym === correctSynonym) {
-            // Acertó, así que reproducimos nuevo sonido y mostramos nuevas palabras del nivel dos
-            playLocalSound();
-            getRandomAdjective(); // Cambia a la siguiente palabra
-            setAttempts(0); // Reinicia los intentos
-        } else {
-            // Incorrecto, aumentamos el contador de intentos
-            setAttempts(attempts + 1);
-
-            if (attempts + 1 >= 2) {
-                // Ha fallado dos veces, muestra alerta de game over
-                Alert.alert(
-                    "Game Over",
-                    "Has fallado dos veces. ¡Inténtalo de nuevo!",
-                    [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-                );
-            } else {
-                console.log("Incorrecto. Intenta de nuevo.");
-            }
-        }
+    const getRandomAdjective = (numberLevel) => {
+        const arrayAdjectives = levelTranslator[numberLevel];
+        const randomIndex = Math.floor(Math.random() * arrayAdjectives.length);
+        const randomAdjective = arrayAdjectives[randomIndex];
+        setRandomAdjective(randomAdjective);
     };
 
-    const playLocalSound = async () => {
-        try {
-            const response = await getData(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${correctSynonym}`
-            );
-            const audio = response[0].phonetics[0].audio;
-            setResult(audio);
+    const resetAnswer = () => {
+        setTries((prev) => prev + 1);
+    };
 
-            const { sound } = await Audio.Sound.createAsync({ uri: result });
-            await sound.playAsync();
-        } catch (error) {
-            console.error("Error al reproducir sonido:", error);
-        }
+    const resetGame = (alertMessage) => {
+        setStartGame(false);
+        if (alertMessage) alert(alertMessage);
+
+        setTries(0);
+    };
+
+    const generateLevel = (number) => {
+        setLevel(number);
+        getRandomAdjective(number);
+        fetchSynonyms(number);
+    };
+
+    const correctAnswer = (selectedSynonym) => {
+        const isSuccess = correctSynonym === selectedSynonym.toLowerCase();
+
+        if (!isSuccess) return resetAnswer();
+
+        if (isSuccess && level < levels[levels.length - 1])
+            return generateLevel(level + 1);
+
+        return resetGame("You WIN!!, Try Again");
+    };
+
+    const tryAgainComponent = () => {
+        return (
+            <TouchableOpacity
+                style={{
+                    borderRadius: 8,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlignVertical: "center",
+                    width: 80,
+                    height: 80,
+                    backgroundColor: "blue",
+                    margin: 5,
+                }}
+                onPress={() => setStartGame(true)}
+            >
+                <Text style={{ fontSize: 20, color: "white" }}>Try Again</Text>
+            </TouchableOpacity>
+        );
     };
 
     return (
@@ -91,26 +155,34 @@ export default function Synonyms() {
                 marginVertical: 80,
             }}
         >
-            {synonyms.map((synonym, index) => (
-                <View style={{ padding: 2 }} key={index}>
-                    <TouchableOpacity
-                        style={{
-                            borderRadius: 8,
-                            justifyContent: "center",
-                            alignItems: "center",
-                            textAlignVertical: "center",
-                            width: 80,
-                            height: 80,
-                            backgroundColor: "blue",
-                        }}
-                        onPress={() => {
-                            handleSynonymPress(synonym);
-                        }}
-                    >
-                        <Text style={{ color: "white" }}>{synonym}</Text>
-                    </TouchableOpacity>
-                </View>
-            ))}
+            {startGame
+                ? synonyms != null && (
+                      <ScrollView>
+                          {synonyms.map((synonym, index) => (
+                              <View style={{ padding: 2 }} key={index}>
+                                  <TouchableOpacity
+                                      style={{
+                                          borderRadius: 8,
+                                          justifyContent: "center",
+                                          alignItems: "center",
+                                          textAlignVertical: "center",
+                                          width: 80,
+                                          height: 80,
+                                          backgroundColor: "blue",
+                                      }}
+                                      onPress={() => {
+                                          correctAnswer(synonym);
+                                      }}
+                                  >
+                                      <Text style={{ color: "white" }}>
+                                          {synonym}
+                                      </Text>
+                                  </TouchableOpacity>
+                              </View>
+                          ))}
+                      </ScrollView>
+                  )
+                : tryAgainComponent()}
         </View>
     );
 }
