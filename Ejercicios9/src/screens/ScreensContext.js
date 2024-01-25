@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-const ScreensContext = createContext(); //Lo que se importa por defecto
+const ScreensContext = createContext(); //Lo que se importa por defecto yva en useContext
 
 export const ScreensProvider = ({ children }) => {
     //Se importa aparte, entre {}
