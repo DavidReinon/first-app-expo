@@ -1,6 +1,18 @@
 import { Audio /*Video*/ } from "expo-av";
 //import { Camera, CameraType } from "expo-camera";
 
+const getData = async (url) => {
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const takePicture = async (camera) => {
     const options = { quality: 0.5, base64: true };
     const img = await camera.current.takePictureAsync(options);
@@ -18,18 +30,6 @@ const stopVideo = async (camera, setCam, cam, setShooting, shooting) => {
     camera.current.stopRecording();
     setCam(!cam);
     setShooting(!shooting);
-};
-
-const getData = async (url) => {
-    try {
-        const response = await fetch(url);
-        if (response.ok) {
-            const result = await response.json();
-            return result;
-        }
-    } catch (error) {
-        console.error(error);
-    }
 };
 
 const playUriSound = async (audioLink) => {
