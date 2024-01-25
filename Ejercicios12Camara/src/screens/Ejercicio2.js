@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Button,
     Image,
+    ScrollView,
 } from "react-native";
 import { Camera, CameraType } from "expo-camera";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -50,14 +51,16 @@ export default function MobileCamera() {
                         title="Fer Foto"
                         onPress={() => setScreenPhoto(true)}
                     ></Button>
-                    {photos.map((imageUri, index) => (
-                        <Image
-                            key={index}
-                            style={styles.images}
-                            source={{ uri: imageUri }}
-                            resizeMode="contain"
-                        ></Image>
-                    ))}
+                    <ScrollView>
+                        {photos.map((imageUri, index) => (
+                            <Image
+                                key={index}
+                                style={styles.images}
+                                source={{ uri: imageUri }}
+                                resizeMode="contain"
+                            ></Image>
+                        ))}
+                    </ScrollView>
                 </View>
             ) : (
                 <View style={styles.container}>
@@ -97,8 +100,8 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     images: {
-        height: 200,
-        width: 200,
+        height: 450,
+        width: 300,
     },
     camera: {
         flex: 1,
