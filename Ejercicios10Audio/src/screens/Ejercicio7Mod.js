@@ -6,14 +6,14 @@ import {
     resumeAudio,
     pauseAudio,
     stopAudio,
-} from "./Ejercicios10Audio/src/services/AudioServices";
+} from "../services/AudioServices";
 import { SelectList } from "react-native-dropdown-select-list";
 
 //Ejercicio 4 (Modificado sin navegación): bloque actividades audio 2
 const Ejercicio7 = () => {
     const [audio, setAudio] = useState(null);
     const [selectedAudio, setSelectedAudio] = useState(null);
-    const rutaAudio = "./Ejercicios10Audio/src/assets/audio/";
+    const rutaAudio = "../assets/audio/";
     const [audioList, setAudioList] = useState([
         require(rutaAudio + "Cristiano_Siuu.m4a"),
         require(rutaAudio + "sn3.wav"),
