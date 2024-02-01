@@ -4,9 +4,9 @@ const ScreensContext = createContext(); //Lo que se importa por defecto y va en 
 
 export const ScreensProvider = ({ children }) => {
     //Se importa aparte, entre {}
-    const [photos, setPhotos] = useState([]);
+    const [uriPhotos, setUriPhotos] = useState([]);
     return (
-        <ScreensContext.Provider value={{ photos, setPhotos }}>
+        <ScreensContext.Provider value={{ uriPhotos, setUriPhotos }}>
             {children}
         </ScreensContext.Provider>
     );

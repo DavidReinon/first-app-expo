@@ -18,7 +18,7 @@ const screenWidth = Dimensions.get("screen").width;
 const FerFoto = (props) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(CameraType.back);
-    const { photos, setPhotos } = useContext(ScreensContext);
+    const { uriPhotos, setUriPhotos } = useContext(ScreensContext);
     const camera = useRef(null);
 
     useEffect(() => {
@@ -37,9 +37,9 @@ const FerFoto = (props) => {
 
     const savePhotos = async () => {
         const picture = await takePicture(camera);
-        const newArray = [...photos];
+        const newArray = [...uriPhotos];
         newArray.push(picture);
-        setPhotos(newArray);
+        setUriPhotos(newArray);
     };
 
     return (
