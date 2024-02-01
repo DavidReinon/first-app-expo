@@ -3,17 +3,18 @@ import React, { useContext } from "react";
 import ScreensContext from "./ScreensContext";
 
 const VisualizarFotos = () => {
-    const { photos } = useContext(ScreensContext);
+    const { uriPhotos } = useContext(ScreensContext);
     return (
         <ScrollView>
-            {photos.map((imageUri, index) => (
-                <Image
-                    key={index}
-                    style={styles.images}
-                    source={{ uri: imageUri }}
-                    resizeMode="contain"
-                ></Image>
-            ))}
+            {uriPhotos !== undefined &&
+                uriPhotos.map((imageUri, index) => (
+                    <Image
+                        key={index}
+                        style={styles.images}
+                        source={{ uri: imageUri }}
+                        resizeMode="contain"
+                    ></Image>
+                ))}
         </ScrollView>
     );
 };
