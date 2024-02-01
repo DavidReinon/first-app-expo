@@ -1,71 +1,21 @@
-import { View, Button } from "react-native";
-import React, { useEffect, useState } from "react";
-import {
-    saveSound,
-    playSavedSound,
-    resumeAudio,
-    pauseAudio,
-    stopAudio,
-} from "./Ejercicios10Audio/src/services/AudioServices";
-import { SelectList } from "react-native-dropdown-select-list";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 
-//Ejercicio 4 (Modificado sin navegación): bloque actividades audio 2
-const Ejercicio7 = () => {
-    const [audio, setAudio] = useState(null);
-    const [selectedAudio, setSelectedAudio] = useState(null);
-    const rutaAudio = "./Ejercicios10Audio/src/assets/audio/";
-    const [audioList, setAudioList] = useState([
-        require(rutaAudio + "Cristiano_Siuu.m4a"),
-        require(rutaAudio + "sn3.wav"),
-        require(rutaAudio + "sunflower.mp3"),
-    ]);
+import Ejercicio1 from "./Ejercicios12Camara/src/screens/Ejercicio1";
+import Ejercicio2 from "./Ejercicios12Camara/src/screens/Ejercicio2";
+import Ejercicio3 from "./Ejercicios12Camara/src/screens/Ejercicio3";
+import Ejercicio6 from "./Ejercicios12Camara/src/screens/Ejercicio6";
 
-    useEffect(() => {
-        const loadAudio = async () => {
-            try {
-                if (selectedAudio) {
-                    const { sound } = await saveSound(selectedAudio);
-                    setAudio(sound);
-                }
-            } catch (error) {
-                console.error("Error loading audio:", error);
-            }
-        };
-        loadAudio();
-    }, [selectedAudio]);
-
-    return (
-        <View style={{ flex: 1, margin: 100 }}>
-            <SelectList
-                setSelected={(val) => setSelectedAudio(val)}
-                data={audioList}
-                save="value"
-                defaultOption={require(rutaAudio + "Cristiano_Siuu.m4a")}
-            />
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <Button
-                    title="PLAY"
-                    onPress={() => playSavedSound(audio)}
-                ></Button>
-                <Button
-                    title="Pause"
-                    onPress={() => pauseAudio(audio)}
-                ></Button>
-                <Button
-                    title="Resume"
-                    onPress={() => resumeAudio(audio)}
-                ></Button>
-                <Button title="Stop" onPress={() => stopAudio(audio)}></Button>
-            </View>
-        </View>
-    );
-};
-
-export default Ejercicio7;
+const Tab = createBottomTabNavigator();
+const App = () => (
+    <NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name="Ejercicio1" component={Ejercicio1} />
+            <Tab.Screen name="Ejercicio2" component={Ejercicio2} />
+            <Tab.Screen name="Ejercicio3" component={Ejercicio3} />
+            <Tab.Screen name="Ejercicio4" component={Ejercicio6} />
+        </Tab.Navigator>
+    </NavigationContainer>
+);
+export default App;
